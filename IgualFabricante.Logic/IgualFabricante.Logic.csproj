@@ -9,4 +9,8 @@
     <ProjectReference Include="..\IgualFabricante.Contracts\IgualFabricante.Contracts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Business\" />
+  </ItemGroup>
+
 </Project>
