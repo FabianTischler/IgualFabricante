@@ -8,9 +8,12 @@ using IgualFabricante.Logic.Entities.Persistence;
 
 namespace IgualFabricante.Logic.DataContext.Db
 {
-    partial class DbMusicStoreContext : DbContext, IContext
+    partial class DbIgualFabricanteContext : DbContext, IContext
     {
         private static string ConnectionString { get; set; } = "Data Source=(localdb)\\MSSQLLocalDb;Database=IgualFabricanteDB;Integrated Security=True;";
+
+        public DbSet<Bill> Bills { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

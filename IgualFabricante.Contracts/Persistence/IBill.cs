@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IgualFabricante.Contracts.Persistence
 {
-    public interface IBill : IIdentifiable, ICopyable<IBill>
+    public interface IBill : IIdentifiable, ICopyable<IExpense>
     {
         DateTime Date { get; set; }
         string Title { get; set; }

@@ -15,17 +15,11 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="IgualFabricante.Contracts.Persistence.IBill">
-    <Position X="3.25" Y="3" Width="1.5" />
+    <Position X="0.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAgAEAAAAAAAAAACAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Persistence\IBill.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="IgualFabricante.Contracts.Persistence.IExpense">
-    <Position X="0.75" Y="3" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAQAAAAAACAAAAAAgAACAAAAAAAAAA=</HashCode>
-      <FileName>Persistence\IExpense.cs</FileName>
+      <NewMemberFileName>Persistence\IExpense.cs</NewMemberFileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

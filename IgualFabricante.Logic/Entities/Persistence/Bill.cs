@@ -6,7 +6,7 @@ using IgualFabricante.Contracts.Persistence;
 
 namespace IgualFabricante.Logic.Entities.Persistence
 {
-    internal class Bill : IdentityObject, Contracts.Persistence.IBill
+    internal class Bill : IdentityObject, Contracts.Persistence.IExpense
     {
         public DateTime Date { get; set; }
         public string Title { get; set; }
@@ -14,7 +14,7 @@ namespace IgualFabricante.Logic.Entities.Persistence
         public string Friends { get; set; }
         public string Currency { get; set; }
 
-        public void CopyProperties(IBill other)
+        public void CopyProperties(IExpense other)
         {
             other.CheckArgument(nameof(other));
             id = other.id;
