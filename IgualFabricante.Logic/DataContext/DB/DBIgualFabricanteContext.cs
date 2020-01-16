@@ -4,11 +4,57 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using IgualFabricante.Contracts;
 using IgualFabricante.Logic.Entities;
+using IgualFabricante.Logic.Entities.Persistence;
 
 namespace IgualFabricante.Logic.DataContext.Db
 {
     partial class DbMusicStoreContext : DbContext, IContext
     {
+        private static string ConnectionString { get; set; } = "Data Source=(localdb)\\MSSQLLocalDb;Database=IgualFabricanteDB;Integrated Security=True;";
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(ConnectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Bill>()
+                .ToTable(nameof(Bill))
+                .HasKey(p => p.id);
+            modelBuilder.Entity<Bill>()
+                .HasIndex(p => p.Title)
+                .IsUnique();
+            modelBuilder.Entity<Bill>()
+                .Property(p => p.Description)
+                .HasMaxLength(256);
+            modelBuilder.Entity<Bill>()
+                .Property(p => p.Friends)
+                .IsRequired()
+                .HasMaxLength(256);
+            modelBuilder.Entity<Bill>()
+                .Property(p => p.Currency)
+                .IsRequired()
+                .HasMaxLength(10);
+            modelBuilder.Entity<Bill>()
+                .Property(p => p.Title)
+                .HasMaxLength(256);
+
+            modelBuilder.Entity<Expense>()
+                .ToTable(nameof(Expense))
+                .HasKey(p => p.id);
+            modelBuilder.Entity<Expense>()
+                .Property(p => p.Designation)
+                .IsRequired()
+                .HasMaxLength(256);
+            modelBuilder.Entity<Expense>()
+                .Property(p => p.Friend)
+                .IsRequired()
+                .HasMaxLength(50);
+        }
         #region IContext
         #region Async-Methods
         public Task<int> CountAsync<I, E>()
@@ -33,7 +79,7 @@ namespace IgualFabricante.Logic.DataContext.Db
                 E newEntity = new E();
 
                 newEntity.CopyProperties(entity);
-                newEntity.Id = 0;
+                newEntity.id = 0;
                 try
                 {
                     if (Entry(newEntity).State == EntityState.Detached)
@@ -63,7 +109,7 @@ namespace IgualFabricante.Logic.DataContext.Db
 
                 if (omEntity.State == EntityState.Detached)
                 {
-                    E attachedEntity = Set<E>().Local.SingleOrDefault(e => e.Id == entity.Id);
+                    E attachedEntity = Set<E>().Local.SingleOrDefault(e => e.id == entity.id);
 
                     if (attachedEntity != null)
                     {
@@ -98,7 +144,7 @@ namespace IgualFabricante.Logic.DataContext.Db
         {
             return Task.Run(() =>
             {
-                E result = Set<E>().SingleOrDefault(i => i.Id == id);
+                E result = Set<E>().SingleOrDefault(i => i.id == id);
 
                 if (result != null)
                 {
