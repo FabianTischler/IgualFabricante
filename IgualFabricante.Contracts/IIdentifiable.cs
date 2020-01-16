@@ -7,5 +7,6 @@ namespace IgualFabricante.Contracts
     public interface IIdentifiable
     {
         int id { get; }
+        object Id { get; }
     }
 }
